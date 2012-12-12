@@ -54,10 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\EntryEditor.cs">
+    <Compile Include="UI\EntryEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\EntryEditor.Designer.cs">
+    <Compile Include="UI\EntryEditor.Designer.cs">
       <DependentUpon>EntryEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Helpers.cs" />
@@ -77,7 +77,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Model\EntryEditor.resx">
+    <EmbeddedResource Include="UI\EntryEditor.resx">
       <DependentUpon>EntryEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Form1.resx">

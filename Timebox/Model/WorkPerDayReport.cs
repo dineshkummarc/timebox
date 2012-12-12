@@ -24,12 +24,12 @@ namespace Timebox.Model
 
       var items = log.ExecuteQuery<Item>(sql, DateTime.Today.AddDays(-30));
 
-      sb.AppendLine("    Date      Time  ");
-      sb.AppendLine("-----------------------------------------------------");
+      sb.AppendLine("   Date        Time    |-------------- 8h --------------|");
+      sb.AppendLine("------------------------------------------------------------");
       foreach (var item in items)
       {
           
-          sb.AppendFormat("{0, 10}. {1, 9} {2}\r\n",
+          sb.AppendFormat("{0, 10}. {1, 9}   {2}\r\n",
                           item.Started_At.ToShortDateString(),
                           item.Duration.AsHumanReadableDuration(),
                           item.Duration.AsBar());

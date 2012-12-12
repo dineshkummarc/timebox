@@ -17,7 +17,7 @@ namespace Timebox.Model
     {
       using(var db = new PetaPoco.Database("timeboxDb"))
       {
-        var res = db.Fetch<string>("select distinct project from LogEntry");
+        var res = db.Fetch<string>("select distinct project from LogEntry order by started_at desc");
         return res;
       }     
     }
