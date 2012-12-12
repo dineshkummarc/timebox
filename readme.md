@@ -1,7 +1,7 @@
 Timebox
 =======
 
-Timebox is a simplistic time loggin tool.
+Timebox is a simplistic time logging tool.
 
 
 Requirements
