@@ -11,19 +11,24 @@ namespace Timebox.Model
 
     public static string AsHumanReadableDuration(this int duration)
     {
+      bool neg = Math.Sign(duration) < 0;
+      duration = Math.Abs(duration);
+      duration = Math.Abs(duration);
       int h = duration / 3600;
       int m = (duration % 3600) / 60;
       int s = (duration % 3600) % 60;
 
-      return string.Format("{0}:{1:00}:{2:00}", h, m, s);
+      return string.Format("{3}{0}:{1:00}:{2:00}", h, m, s, neg ? "-" : "");
     }
     public static string AsHumanReadableDurationFull(this int duration)
     {
+      bool neg = Math.Sign(duration) < 0;
+      duration = Math.Abs(duration);
       int h = duration / 3600;
       int m = (duration % 3600) / 60;
       int s = (duration % 3600) % 60;
 
-      return string.Format("{0}h:{1:00}m:{2:00}s", h, m, s);
+      return string.Format("{3}{0}h:{1:00}m:{2:00}s", h, m, s, neg ? "-" : "");
     }
 
     public static string AsPercentageBar(this int percentage)
