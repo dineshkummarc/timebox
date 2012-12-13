@@ -99,6 +99,9 @@
     <EmbeddedResource Include="UI\StatsControl.resx">
       <DependentUpon>StatsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\TimeboxEditor.resx">
+      <DependentUpon>TimeboxEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\TimerCtrl.resx">
       <DependentUpon>TimerCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +133,15 @@
     </Compile>
     <Compile Include="UI\ReportControl.Designer.cs">
       <DependentUpon>ReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TimeboxEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TimeboxEditor.Designer.cs">
+      <DependentUpon>TimeboxEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TimeLabel.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\StatsControl.cs">
       <SubType>UserControl</SubType>

@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Timebox.Model;
 
@@ -19,7 +14,7 @@ namespace Timebox
 
       m_reports["Work Overview"] = new WorkOverviewReport();
       m_reports["Monthly Summary"] = new MonthlySummaryReport();
-      m_reports["Work/Day"] = new WorkPerDayReport();
+      m_reports["Effective Work / Day"] = new WorkPerDayReport();
 
       foreach (var pair in m_reports)
       {

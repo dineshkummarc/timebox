@@ -17,6 +17,14 @@ namespace Timebox.Model
 
       return string.Format("{0}:{1:00}:{2:00}", h, m, s);
     }
+    public static string AsHumanReadableDurationFull(this int duration)
+    {
+      int h = duration / 3600;
+      int m = (duration % 3600) / 60;
+      int s = (duration % 3600) % 60;
+
+      return string.Format("{0}h:{1:00}m:{2:00}s", h, m, s);
+    }
 
     public static string AsPercentageBar(this int percentage)
     {

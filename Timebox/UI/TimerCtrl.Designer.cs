@@ -30,7 +30,10 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimerCtrl));
-      this.lblTime = new SmoothLabel();
+      this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.cmdSetTimebox = new System.Windows.Forms.ToolStripMenuItem();
+      this.cmdRemoveTimebox = new System.Windows.Forms.ToolStripMenuItem();
+      this.cmdToggleFrame = new System.Windows.Forms.ToolStripMenuItem();
       this.cboProjects = new System.Windows.Forms.ComboBox();
       this.label2 = new System.Windows.Forms.Label();
       this.label3 = new System.Windows.Forms.Label();
@@ -38,20 +41,40 @@
       this.timer1 = new System.Windows.Forms.Timer(this.components);
       this.button1 = new System.Windows.Forms.Button();
       this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+      this.lblTime = new Timebox.TimeLabel();
+      this.contextMenuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
-      // lblTime
+      // contextMenuStrip1
       // 
-      this.lblTime.BackColor = System.Drawing.Color.MistyRose;
-      this.lblTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.lblTime.Font = new System.Drawing.Font("Calibri", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-      this.lblTime.Location = new System.Drawing.Point(0, 12);
-      this.lblTime.Name = "lblTime";
-      this.lblTime.Size = new System.Drawing.Size(236, 64);
-      this.lblTime.TabIndex = 0;
-      this.lblTime.Text = "0:00:00";
-      this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      this.lblTime.DoubleClick += new System.EventHandler(this.lblTime_DoubleClick);
+      this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmdSetTimebox,
+            this.cmdRemoveTimebox,
+            this.cmdToggleFrame});
+      this.contextMenuStrip1.Name = "contextMenuStrip1";
+      this.contextMenuStrip1.Size = new System.Drawing.Size(167, 70);
+      // 
+      // cmdSetTimebox
+      // 
+      this.cmdSetTimebox.Name = "cmdSetTimebox";
+      this.cmdSetTimebox.Size = new System.Drawing.Size(166, 22);
+      this.cmdSetTimebox.Text = "Set Timebox...";
+      this.cmdSetTimebox.Visible = false;
+      this.cmdSetTimebox.Click += new System.EventHandler(this.cmdSetTimebox_Click);
+      // 
+      // cmdRemoveTimebox
+      // 
+      this.cmdRemoveTimebox.Name = "cmdRemoveTimebox";
+      this.cmdRemoveTimebox.Size = new System.Drawing.Size(166, 22);
+      this.cmdRemoveTimebox.Text = "Remove Timebox";
+      this.cmdRemoveTimebox.Visible = false;
+      this.cmdRemoveTimebox.Click += new System.EventHandler(this.cmdRemoveTimebox_Click);
+      // 
+      // cmdToggleFrame
+      // 
+      this.cmdToggleFrame.Name = "cmdToggleFrame";
+      this.cmdToggleFrame.Size = new System.Drawing.Size(166, 22);
+      this.cmdToggleFrame.Text = "Toggle Frame";
       // 
       // cboProjects
       // 
@@ -70,7 +93,7 @@
       this.label2.Location = new System.Drawing.Point(-3, 92);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(43, 13);
-      this.label2.TabIndex = 3;
+      this.label2.TabIndex = 4;
       this.label2.Text = "Project:";
       // 
       // label3
@@ -79,7 +102,7 @@
       this.label3.Location = new System.Drawing.Point(-3, 119);
       this.label3.Name = "label3";
       this.label3.Size = new System.Drawing.Size(54, 13);
-      this.label3.TabIndex = 4;
+      this.label3.TabIndex = 5;
       this.label3.Text = "Comment:";
       // 
       // txtComment
@@ -117,6 +140,21 @@
       this.imageList1.Images.SetKeyName(2, "1355220707_paly.png");
       this.imageList1.Images.SetKeyName(3, "1355220700_stop.png");
       // 
+      // lblTime
+      // 
+      this.lblTime.BackColor = System.Drawing.Color.MistyRose;
+      this.lblTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.lblTime.ContextMenuStrip = this.contextMenuStrip1;
+      this.lblTime.Elapsed = 0;
+      this.lblTime.Font = new System.Drawing.Font("Calibri", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+      this.lblTime.Location = new System.Drawing.Point(0, 12);
+      this.lblTime.Name = "lblTime";
+      this.lblTime.Size = new System.Drawing.Size(236, 64);
+      this.lblTime.TabIndex = 3;
+      this.lblTime.Text = "0:00:00";
+      this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.lblTime.DoubleClick += new System.EventHandler(this.lblTime_DoubleClick);
+      // 
       // TimerCtrl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,6 +168,7 @@
       this.Controls.Add(this.lblTime);
       this.Name = "TimerCtrl";
       this.Size = new System.Drawing.Size(315, 145);
+      this.contextMenuStrip1.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -137,7 +176,7 @@
 
     #endregion
 
-    private SmoothLabel lblTime;
+    private TimeLabel lblTime;
     private System.Windows.Forms.ComboBox cboProjects;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.Label label3;
@@ -145,5 +184,9 @@
     private System.Windows.Forms.Timer timer1;
     private System.Windows.Forms.Button button1;
     private System.Windows.Forms.ImageList imageList1;
+    private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+    private System.Windows.Forms.ToolStripMenuItem cmdSetTimebox;
+    private System.Windows.Forms.ToolStripMenuItem cmdRemoveTimebox;
+    private System.Windows.Forms.ToolStripMenuItem cmdToggleFrame;
   }
 }

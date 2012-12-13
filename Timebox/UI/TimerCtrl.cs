@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Timebox.Model;
+using Timebox.UI;
 
 namespace Timebox
 {
@@ -24,6 +19,9 @@ namespace Timebox
       InitializeComponent();
 
       m_log = new TimeLog();
+
+      cmdToggleFrame.Click += (s, a) => ToggleFrame();
+      lblTime.TimeboxExpired += (s, notify, stop) => OnTimeboxExpired(notify, stop);
     }
 
     protected override void OnLoad(EventArgs e)
@@ -65,8 +63,7 @@ namespace Timebox
       if(m_active)
       {
         m_span = DateTime.Now - m_start;
-        var txt = string.Format("{0}:{1:00}:{2:00}", m_span.Hours, m_span.Minutes, m_span.Seconds);
-        if(txt != lblTime.Text) lblTime.Text = txt;
+        lblTime.Elapsed = (int)m_span.TotalSeconds;
       } 
     }
 
@@ -82,12 +79,15 @@ namespace Timebox
       else
       {
         lblTime.BackColor = Color.Honeydew;
+        lblTime.SetTimebox(0, false, false);
         button1.ImageIndex = 3;
         timer1.Start();
       }
 
       m_start = DateTime.Now;
       m_active = !m_active;
+
+      UpdateTimeboxCommands();
     }
 
     private void cboProjects_TextChanged(object sender, EventArgs e)
@@ -108,21 +108,60 @@ namespace Timebox
 
     private void lblTime_DoubleClick(object sender, EventArgs e)
     {
+      ToggleFrame();
+    }
+
+    private void ToggleFrame()
+    {
       var frm = ParentForm;
       if (frm.FormBorderStyle == FormBorderStyle.None)
         frm.FormBorderStyle = FormBorderStyle.FixedDialog;
       else
         frm.FormBorderStyle = FormBorderStyle.None;
     }
-  }
 
-  internal class SmoothLabel : Label
-  {
-    protected override void OnPaint(PaintEventArgs e)
+    private void OnTimeboxExpired(bool notify, bool stopOnEnd)
     {
-      e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-      base.OnPaint(e);
+      if(stopOnEnd && m_active)  // todo: duplicated from click handler - DRY
+      {
+        lblTime.BackColor = Color.MistyRose;
+        timer1.Stop();
+        button1.ImageIndex = 2;
+        StoreEntry();     
+        m_start = DateTime.Now;
+        m_active = !m_active;
+      }
+
+      UpdateTimeboxCommands();
+
+      if(notify)
+        MessageBox.Show("Timebox for current task has expired" + stopOnEnd, "Timebox expired",
+                      MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+    }
+
+    private void cmdSetTimebox_Click(object sender, EventArgs e)
+    {
+      var frm = new TimeboxEditor();
+      if(DialogResult.OK != frm.ShowDialog()) return;
+
+      bool notify = frm.Notify;
+      bool stop = frm.StopOnEnd;
+      int duration = frm.Duration;
+
+      lblTime.SetTimebox(duration, notify, stop);
+      UpdateTimeboxCommands();
+    }
+
+    private void cmdRemoveTimebox_Click(object sender, EventArgs e)
+    {
+      lblTime.SetTimebox(0, false, false);
+      UpdateTimeboxCommands();
+    }
+
+    private void UpdateTimeboxCommands()
+    {
+      cmdSetTimebox.Visible = m_active && !lblTime.HasTimebox;     // todo: unify cmd visibility
+      cmdRemoveTimebox.Visible = m_active && lblTime.HasTimebox;
     }
   }
-    
 }
