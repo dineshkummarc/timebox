@@ -12,5 +12,6 @@ namespace Timebox.Model
     void Remove(LogEntry entry);
     void Update(LogEntry entry);
     IList<T> ExecuteQuery<T>(string sql, params object[] args);
+    LogEntry Merge(IList<LogEntry> entries, string desc);
   }
 }

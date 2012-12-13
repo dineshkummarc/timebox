@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Timebox.Model
 {
@@ -61,6 +62,25 @@ namespace Timebox.Model
       {
         return db.Fetch<T>(sql, args);
       }
-    }   
+    }
+
+    public LogEntry Merge(IList<LogEntry> entries, string desc)
+    {
+      var start = entries.OrderBy(e => e.StartedAt).First().StartedAt;
+      var duration = entries.Sum(e => e.Duration);
+      var project = entries[0].Project;
+
+      using (var db = new PetaPoco.Database("timeboxDb"))
+      {
+        foreach (var e in entries)
+        {
+          db.Delete(e);
+        }
+
+        var entry = new LogEntry() {Project = project, Duration = duration, Comment = desc, StartedAt = start};
+        db.Insert(entry);
+        return entry;
+      }              
+    }
   }
 }

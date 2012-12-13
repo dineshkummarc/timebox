@@ -123,6 +123,7 @@
       this.Controls.Add(this.txtProject);
       this.Controls.Add(this.label1);
       this.Name = "EntryEditor";
+      this.ShowInTaskbar = false;
       this.Text = "Edit Log Entry";
       this.ResumeLayout(false);
       this.PerformLayout();

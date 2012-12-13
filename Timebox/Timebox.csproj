@@ -90,6 +90,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\MergeForm.resx">
+      <DependentUpon>MergeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ReportControl.resx">
       <DependentUpon>ReportControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,6 +118,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UI\MergeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MergeForm.Designer.cs">
+      <DependentUpon>MergeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ReportControl.cs">
       <SubType>UserControl</SubType>

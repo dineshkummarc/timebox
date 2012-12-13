@@ -34,13 +34,15 @@
       this.btnToHTML = new System.Windows.Forms.Button();
       this.lstEntries = new System.Windows.Forms.ListView();
       this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+      this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
       this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
       this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-      this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-      this.btnReset = new System.Windows.Forms.Button();
       this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.cmdEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.cmdRemove = new System.Windows.Forms.ToolStripMenuItem();
+      this.btnReset = new System.Windows.Forms.Button();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.cmdMerge = new System.Windows.Forms.ToolStripMenuItem();
       this.contextMenuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -105,6 +107,12 @@
       this.columnHeader1.Text = "Project";
       this.columnHeader1.Width = 94;
       // 
+      // columnHeader4
+      // 
+      this.columnHeader4.Text = "Started At";
+      this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.columnHeader4.Width = 65;
+      // 
       // columnHeader2
       // 
       this.columnHeader2.Text = "Duration";
@@ -116,30 +124,15 @@
       this.columnHeader3.Text = "Comment";
       this.columnHeader3.Width = 223;
       // 
-      // columnHeader4
-      // 
-      this.columnHeader4.Text = "Started At";
-      this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.columnHeader4.Width = 65;
-      // 
-      // btnReset
-      // 
-      this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.btnReset.Location = new System.Drawing.Point(291, 328);
-      this.btnReset.Name = "btnReset";
-      this.btnReset.Size = new System.Drawing.Size(90, 31);
-      this.btnReset.TabIndex = 6;
-      this.btnReset.Text = "Reset";
-      this.btnReset.UseVisualStyleBackColor = true;
-      this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-      // 
       // contextMenuStrip1
       // 
       this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmdEdit,
-            this.cmdRemove});
+            this.cmdRemove,
+            this.toolStripSeparator1,
+            this.cmdMerge});
       this.contextMenuStrip1.Name = "contextMenuStrip1";
-      this.contextMenuStrip1.Size = new System.Drawing.Size(161, 48);
+      this.contextMenuStrip1.Size = new System.Drawing.Size(161, 98);
       // 
       // cmdEdit
       // 
@@ -154,6 +147,30 @@
       this.cmdRemove.Size = new System.Drawing.Size(160, 22);
       this.cmdRemove.Text = "Delete Log Entry";
       this.cmdRemove.Click += new System.EventHandler(this.cmdRemove_Click);
+      // 
+      // btnReset
+      // 
+      this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.btnReset.Location = new System.Drawing.Point(291, 328);
+      this.btnReset.Name = "btnReset";
+      this.btnReset.Size = new System.Drawing.Size(90, 31);
+      this.btnReset.TabIndex = 6;
+      this.btnReset.Text = "Reset";
+      this.btnReset.UseVisualStyleBackColor = true;
+      this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+      // 
+      // cmdMerge
+      // 
+      this.cmdMerge.Enabled = false;
+      this.cmdMerge.Name = "cmdMerge";
+      this.cmdMerge.Size = new System.Drawing.Size(160, 22);
+      this.cmdMerge.Text = "Merge Entries";
+      this.cmdMerge.Click += new System.EventHandler(this.cmdMerge_Click);
       // 
       // ReportControl
       // 
@@ -185,5 +202,7 @@
     private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     private System.Windows.Forms.ToolStripMenuItem cmdEdit;
     private System.Windows.Forms.ToolStripMenuItem cmdRemove;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem cmdMerge;
   }
 }

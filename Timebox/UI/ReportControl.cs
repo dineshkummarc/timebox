@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Timebox.Model;
+using Timebox.UI;
 
 namespace Timebox
 {
@@ -146,9 +147,39 @@ namespace Timebox
 
     private void lstEntries_SelectedIndexChanged(object sender, EventArgs e)
     {
-      bool hasSelection = lstEntries.SelectedItems.Count > 0;
-      cmdRemove.Enabled = hasSelection;
-      cmdEdit.Enabled = hasSelection;
+      bool singleSelection = lstEntries.SelectedItems.Count == 1;
+      cmdRemove.Enabled = singleSelection;
+      cmdEdit.Enabled = singleSelection;
+      cmdMerge.Enabled = false;
+      if(lstEntries.SelectedItems.Count < 2) return;
+      
+      var items = lstEntries.SelectedItems.Cast<ListViewItem>().Select(i => (LogEntry)i.Tag);
+
+      bool sameProject = items.GroupBy(i => i.Project).Count() == 1;
+      if(!sameProject)
+        return;
+
+      var indices = lstEntries.SelectedItems.Cast<ListViewItem>().OrderBy(i => i.Index).Select(i => i.Index);
+      bool continuousSelection = indices.Last() - indices.First() == indices.Count() - 1;
+      cmdMerge.Enabled = continuousSelection;
+    }
+
+    private void cmdMerge_Click(object sender, EventArgs e)
+    {
+      var items = lstEntries.SelectedItems.Cast<ListViewItem>().Select(i => (LogEntry) i.Tag);
+      var duration = items.Sum(i => i.Duration);
+      var comments = items.Where(i => !string.IsNullOrEmpty(i.Comment)).Select(i => i.Comment).ToArray();
+      string desc = string.Join(", ", comments);
+
+      var itemList = items.ToList();
+      var frm = new MergeForm(itemList, desc);
+      if(DialogResult.OK != frm.ShowDialog()) return;
+
+      desc = frm.Description;
+
+      ITimeLog log = new TimeLog();
+      log.Merge(itemList, desc);
+      RefreshReport();
     }
   }
 }
