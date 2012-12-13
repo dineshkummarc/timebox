@@ -135,7 +135,7 @@ namespace Timebox
       UpdateTimeboxCommands();
 
       if(notify)
-        MessageBox.Show("Timebox for current task has expired" + stopOnEnd, "Timebox expired",
+        MessageBox.Show("Timebox for current task has expired!", "Timebox expired",
                       MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
     }
 
