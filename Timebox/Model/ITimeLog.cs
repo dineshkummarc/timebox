@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Timebox.Model
 {
-  internal interface ITimeLog
+  public interface ITimeLog
   {
     void AddEntry(LogEntry entry);
     IList<string> GetAllProjects();

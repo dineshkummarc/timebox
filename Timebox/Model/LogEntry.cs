@@ -9,7 +9,7 @@ namespace Timebox.Model
   [TableName("LogEntry")]
   [PrimaryKey("Id", autoIncrement = true)]
   [ExplicitColumns]
-  class LogEntry
+  public class LogEntry
   {
     private string m_comment;
     public LogEntry()

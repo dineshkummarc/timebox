@@ -10,7 +10,6 @@ namespace Timebox
   internal class TimeLabel : Label
   {
     private int m_elapsed;
-    private int m_timeboxDuration;
     private bool m_notify, m_timeboxExpired, m_stopOnEnd;
     private StringFormat m_fmt;
     
@@ -30,8 +29,6 @@ namespace Timebox
 
     protected override void OnPaint(PaintEventArgs e)
     {
-      var hint = e.Graphics.TextRenderingHint;
-      var mode = e.Graphics.SmoothingMode;
       if(TimeboxDuration > 0)
       {
         DrawTimeboxInfo(e.Graphics);
@@ -87,18 +84,8 @@ namespace Timebox
       m_timeboxExpired = false;
     }
 
-    private int TimeboxDuration
-    {
-      get { return m_timeboxDuration; }
-      set
-      {
-        m_timeboxDuration = value;
-        if (value == 0)
-          Padding = new Padding(0, 0, 0, 0);
-      }
-    }
-
-    public bool HasTimebox { get { return m_timeboxDuration > 0; } }
+    private int TimeboxDuration { get; set; }
+    public bool HasTimebox { get { return TimeboxDuration > 0; } }
 
     public int Elapsed
     {

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using Timebox.Model;
+using Timebox.Reports;
 
 namespace Timebox
 {
@@ -12,9 +15,17 @@ namespace Timebox
     {
       InitializeComponent();
 
+      var rpts = Assembly.GetExecutingAssembly().GetTypes()
+        .Where(t => typeof (IReport).IsAssignableFrom(t) && !t.IsAbstract);
+      foreach (var rptType in rpts)
+      {
+        var rpt = Activator.CreateInstance(rptType) as IReport;
+        m_reports[rpt.Name] = rpt;
+      }
+      /*
       m_reports["Work Overview"] = new WorkOverviewReport();
       m_reports["Monthly Summary"] = new MonthlySummaryReport();
-      m_reports["Effective Work / Day"] = new WorkPerDayReport();
+      m_reports["Effective Work / Day"] = new WorkPerDayReport();  */
 
       foreach (var pair in m_reports)
       {
@@ -23,31 +34,12 @@ namespace Timebox
       cboReports.SelectedIndex = 0;
     }
 
-    void ProcessLogItemsSince(DateTime when, Action<LogEntry> action)
-    {
-      var log = new TimeLog();
-      var entries = log.GetEntriesSince(when);
-      foreach (var entry in entries) action(entry);
-    }
-
     private void button1_Click(object sender, EventArgs e)
     {
       var report_key = cboReports.Text;
       var report = m_reports[report_key];
-      textBox1.Text = report.Generate();
+      report.Execute();
+      textBox1.Text = report.Text;
     }
-
-    private void WorkOverviewReport()
-    {
-      var log = new TimeLog();
-      
-    }
-
-    private void MonthlySummaryReport()
-    {
-      
-    }
-
-
   }
 }

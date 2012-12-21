@@ -56,6 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Reports\DescriptionAttribute.cs" />
+    <Compile Include="Reports\DetailedWorkReport.cs" />
+    <Compile Include="Reports\GroupedByAttribute.cs" />
+    <Compile Include="Reports\IReport.cs" />
+    <Compile Include="Reports\MonthlySummaryReport.cs" />
+    <Compile Include="Reports\ReportBase.cs" />
+    <Compile Include="Reports\ReportBaseT.cs" />
+    <Compile Include="Reports\WorkOverviewReport.cs" />
+    <Compile Include="Reports\WorkPerDayReport.cs" />
     <Compile Include="UI\EntryEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,11 +75,8 @@
     <Compile Include="Model\IReport.cs" />
     <Compile Include="Model\ITimeLog.cs" />
     <Compile Include="Model\LogEntry.cs" />
-    <Compile Include="Model\MonthlySummaryReport.cs" />
     <Compile Include="Model\PetaPoco.cs" />
     <Compile Include="Model\TimeLog.cs" />
-    <Compile Include="Model\WorkOverviewReport.cs" />
-    <Compile Include="Model\WorkPerDayReport.cs" />
     <Compile Include="UI\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
